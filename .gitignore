@@ -1,0 +1,13 @@
+# Secrets and machine-specific config (recreate from the README)
+.env
+compose.override.yaml
+
+# Runtime data (settings.json, saved game state): created at first start
+data/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/

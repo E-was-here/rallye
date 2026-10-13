@@ -1,0 +1,23 @@
+name: scouts-${GAME_NAME:?GAME_NAME must be set in .env}
+
+services:
+  game:
+    image: docker.io/library/node:22-alpine
+    container_name: scouts-${GAME_NAME}
+    working_dir: /app
+    command: node server/server.js
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+    environment:
+      PORT: ${PORT}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      BASE_PATH: /${GAME_NAME}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true

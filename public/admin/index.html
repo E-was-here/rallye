@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administration</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Administration</h1>
+    <div class="right">
+      <a class="btn" href="../">← Tableau de bord</a>
+      <div id="conn" class="warn" hidden>⚠ Serveur injoignable</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- View: sign in -->
+    <section id="login-view" class="card" hidden>
+      <h2>Connexion</h2>
+      <form id="login-form">
+        <label for="username">Utilisateur</label>
+        <input id="username" type="text" autocomplete="username" required>
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <div class="row"><button type="submit">Se connecter</button><span id="login-error" class="bad" role="alert"></span></div>
+      </form>
+    </section>
+
+    <!-- View: panel -->
+    <section id="panel-view" hidden>
+      <div class="card row between">
+        <span>Session : expire dans <strong id="ttl">--:--</strong> <small>(renouvelée à chaque action)</small></span>
+        <button id="logout" type="button" class="secondary">Déconnexion</button>
+      </div>
+
+      <div class="card">
+        <h2>Message affiché</h2>
+        <form id="message-form">
+          <input id="message" type="text" maxlength="500" required>
+          <div class="row"><button type="submit">Enregistrer</button><span id="msg" role="status"></span></div>
+        </form>
+        <p id="live" class="muted"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../config.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
