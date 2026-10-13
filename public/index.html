@@ -1,23 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tableau de bord</title>
-  <link rel="icon" href="data:,">
+  <title>Tableau des points</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header>
-    <h1 id="title">Tableau de bord</h1>
-    <div class="right">
-      <a id="admin-btn" class="btn" href="admin/" hidden>Admin</a>
-      <div id="status"></div>
+<body class="g-body">
+  <header class="g-banner">
+    <div class="g-wrap">
+      <h1 id="title"></h1>
+      <div class="g-totals">
+        <div class="g-total"><b id="totalKm">–</b><span>km parcourus</span></div>
+        <div class="g-total"><b id="totalMissions">–</b><span id="missionsLabel">missions complétées</span></div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="card"><p id="message" class="big">Chargement…</p></section>
+  <main class="g-wrap">
+    <div class="g-tabs" role="tablist" aria-label="Classements">
+      <button class="g-tab" role="tab" data-tab="points" aria-selected="true">Points</button>
+      <button class="g-tab" role="tab" data-tab="km" aria-selected="false">Kilomètres</button>
+      <button class="g-tab" role="tab" data-tab="missions" aria-selected="false">Missions</button>
+    </div>
+    <ol id="ranking" class="g-ranking" role="tabpanel"></ol>
+
+    <div class="g-status">
+      <span id="updated"></span>
+      <span id="online"></span>
+      <span id="offline" class="g-offline" hidden>Serveur injoignable</span>
+      <span id="warnings" class="g-warn"></span>
+      <a id="adminBtn" class="g-btn" href="admin/" hidden>Admin</a>
+    </div>
   </main>
 
   <script src="config.js"></script>

@@ -1,52 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
   <title>Administration</title>
-  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-  <header>
-    <h1>Administration</h1>
-    <div class="right">
-      <a class="btn" href="../">← Tableau de bord</a>
-      <div id="conn" class="warn" hidden>⚠ Serveur injoignable</div>
-    </div>
-  </header>
-
-  <main>
-    <!-- View: sign in -->
-    <section id="login-view" class="card" hidden>
-      <h2>Connexion</h2>
-      <form id="login-form">
-        <label for="username">Utilisateur</label>
-        <input id="username" type="text" autocomplete="username" required>
-        <label for="password">Mot de passe</label>
-        <input id="password" type="password" autocomplete="current-password" required>
-        <div class="row"><button type="submit">Se connecter</button><span id="login-error" class="bad" role="alert"></span></div>
+<body class="g-body">
+  <div class="g-wrap">
+    <section id="login" class="g-login" hidden>
+      <h1>Administration</h1>
+      <form id="loginForm">
+        <label class="g-field"><span>Identifiant</span>
+          <input id="user" class="g-input" autocomplete="username" required></label>
+        <label class="g-field"><span>Mot de passe</span>
+          <input id="pass" class="g-input" type="password" autocomplete="current-password" required></label>
+        <button class="g-btn g-btn-primary" type="submit">Se connecter</button>
+        <p id="loginError" class="g-msg err"></p>
       </form>
     </section>
 
-    <!-- View: panel -->
-    <section id="panel-view" hidden>
-      <div class="card row between">
-        <span>Session : expire dans <strong id="ttl">--:--</strong> <small>(renouvelée à chaque action)</small></span>
-        <button id="logout" type="button" class="secondary">Déconnexion</button>
+    <div id="panel" hidden>
+      <div class="g-bar">
+        <span>Session : <b id="countdown">--:--</b></span>
+        <span id="offline" class="g-offline" hidden>Serveur injoignable</span>
+        <span>
+          <a class="g-btn" href="../">Voir le classement</a>
+          <button id="logout" class="g-btn" type="button">Se déconnecter</button>
+        </span>
       </div>
 
-      <div class="card">
-        <h2>Message affiché</h2>
-        <form id="message-form">
-          <input id="message" type="text" maxlength="500" required>
-          <div class="row"><button type="submit">Enregistrer</button><span id="msg" role="status"></span></div>
+      <section class="g-section">
+        <h2 id="formTitle">Encoder une mission</h2>
+        <form id="missionForm">
+          <label class="g-field"><span>Nom de la tâche</span>
+            <input id="mName" class="g-input" maxlength="100" required></label>
+          <div class="g-pair">
+            <label class="g-field"><span>Kilomètres</span>
+              <input id="mKm" class="g-input" type="number" min="0" step="any" inputmode="decimal" required></label>
+            <label class="g-field"><span>Points</span>
+              <input id="mPoints" class="g-input" type="number" min="0" step="1" inputmode="numeric" required></label>
+          </div>
+          <div class="g-field"><span>Participants</span>
+            <input id="filter" class="g-input" type="search" placeholder="Filtrer par nom" autocomplete="off">
+            <div id="playerList" class="g-players"></div>
+            <div id="selCount" class="g-count"></div>
+          </div>
+          <div class="g-form-actions">
+            <button id="mSubmit" class="g-btn g-btn-primary" type="submit">Enregistrer la mission</button>
+            <button id="mCancel" class="g-btn" type="button" hidden>Annuler la modification</button>
+          </div>
+          <p id="missionMsg" class="g-msg"></p>
         </form>
-        <p id="live" class="muted"></p>
-      </div>
-    </section>
-  </main>
+      </section>
+
+      <section class="g-section">
+        <h2>Ajouter un participant</h2>
+        <form id="playerForm">
+          <label class="g-field"><span>Nom</span>
+            <input id="pName" class="g-input" maxlength="60" autocomplete="off" required></label>
+          <button id="pSubmit" class="g-btn g-btn-primary" type="submit">Ajouter le participant</button>
+          <p id="playerMsg" class="g-msg"></p>
+        </form>
+      </section>
+
+      <section class="g-section">
+        <h2>Missions encodées</h2>
+        <ul id="missions" class="g-missions"></ul>
+      </section>
+    </div>
+  </div>
 
   <script src="../config.js"></script>
   <script src="../js/utils.js"></script>
